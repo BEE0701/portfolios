@@ -1,0 +1,798 @@
+:root {
+  --deepBlue: #414059;
+  --blue: #94ABF2;
+  --lightBlue: #B6D0F2;
+  --yellow: #F2C777;
+  --white: #F2F0F0;
+  --bg: #404040;
+
+}
+
+/* 레이아웃 */
+body {
+  margin: 0;
+  padding: 0;
+  min-height: 500vh;
+  background: var(--bg);
+}
+
+header {
+  width: 100%;
+  padding: 10px 80px;
+  display: flex;
+  justify-content: space-between;
+  text-align: center;
+  align-items: center;
+  box-sizing: border-box;
+  position: fixed;
+  z-index: 2;
+
+  & h1 {
+    width: 200px;
+
+    & img {
+      width: 100%;
+    }
+  }
+
+  & nav ul {
+    display: flex;
+    gap: 50px;
+
+    & a {
+      font-size: 25px;
+      color: var(--white);
+      font-weight: 400;
+      font-family: 'JejuStoneWall';
+    }
+  }
+}
+
+header.hide {
+  transform: translateY(-100%);
+  transition-duration: 1s;
+}
+
+
+main {
+  width: 100%;
+  height: 800vh;
+  position: relative;
+  background-color: var(--bg);
+}
+
+
+.firstSec {
+  width: 100%;
+  position: relative;
+  height: 250vh;
+  background: #404040;
+  padding-top: 100px;
+}
+
+
+
+.oozyLogo {
+  width: 300px;
+  position: absolute;
+  left: 10%;
+  top: 0;
+  animation: rotation 5s linear infinite;
+  z-index: 2;
+
+
+}
+
+.oozyLogo>img {
+  width: 100%;
+  position: sticky;
+  left: 30%;
+  bottom: -150px;
+
+
+}
+
+@keyframes rotation {
+  100% {
+    rotate: 360deg;
+  }
+}
+
+.balloon {
+  width: 20%;
+  position: absolute;
+  right: 0;
+  top: 10%;
+  z-index: 3;
+  animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+  0% {
+    transform: translatey(0px);
+  }
+
+  50% {
+    transform: translatey(-20px);
+  }
+
+  100% {
+
+    transform: translatey(0px);
+  }
+}
+
+.balloon>img {
+  width: 100%;
+
+}
+
+.firstSec .container {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: clamp(16px, 2.2vw, 28px);
+  overflow: hidden;
+  background-image: url(./../img/firstSecBg5.png);
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center center;
+  z-index: 2;
+
+}
+
+
+.firstSec .line {
+  display: grid;
+  grid-auto-flow: column;
+  --box: clamp(64px, 7.5vw, 120px);
+  grid-auto-columns: var(--box);
+  gap: clamp(10px, 1.4vw, 22px);
+  place-items: center;
+  justify-content: center;
+}
+
+
+.firstSec .line .cell {
+  width: 65px;
+  display: grid;
+  place-items: center;
+}
+
+.firstSec .line .cell img {
+  width: 100%;
+  height: auto;
+  transform: translate(var(--tx, 0), var(--ty, 0)) rotate(var(--rot, 0));
+  transition: transform 900ms cubic-bezier(.2, .8, .2, 1);
+  filter: drop-shadow(0 2px 6px rgba(0, 0, 0, .45));
+}
+
+
+.firstSec.aligned .cell img {
+  transform: translate(0, 0) rotate(0);
+}
+
+
+.firstSec .line:nth-of-type(1) .cell:nth-child(1) img {
+  --tx: -35vw;
+  --ty: -22vh;
+  --rot: -20deg;
+}
+
+.firstSec .line:nth-of-type(1) .cell:nth-child(2) img {
+  --tx: 28vw;
+  --ty: -30vh;
+  --rot: 16deg;
+}
+
+.firstSec .line:nth-of-type(1) .cell:nth-child(3) img {
+  --tx: -18vw;
+  --ty: 24vh;
+  --rot: -12deg;
+}
+
+.firstSec .line:nth-of-type(1) .cell:nth-child(4) img {
+  --tx: 36vw;
+  --ty: 14vh;
+  --rot: 22deg;
+}
+
+.firstSec .line:nth-of-type(1) .cell:nth-child(5) img {
+  --tx: -32vw;
+  --ty: 28vh;
+  --rot: -18deg;
+}
+
+.firstSec .line:nth-of-type(1) .cell:nth-child(6) img {
+  --tx: 22vw;
+  --ty: -18vh;
+  --rot: 26deg;
+  width: 40px;
+}
+
+.firstSec .line:nth-of-type(1) .cell:nth-child(7) img {
+  --tx: -40vw;
+  --ty: 8vh;
+  --rot: 12deg;
+}
+
+/* 넓게 흩어짐 — 2줄 PORTFOLI */
+.firstSec .line:nth-of-type(2) .cell:nth-child(1) img {
+  --tx: 30vw;
+  --ty: -26vh;
+  --rot: -14deg;
+}
+
+.firstSec .line:nth-of-type(2) .cell:nth-child(2) img {
+  --tx: -28vw;
+  --ty: 22vh;
+  --rot: 18deg;
+}
+
+.firstSec .line:nth-of-type(2) .cell:nth-child(3) img {
+  --tx: 34vw;
+  --ty: -20vh;
+  --rot: -10deg;
+}
+
+.firstSec .line:nth-of-type(2) .cell:nth-child(4) img {
+  --tx: -36vw;
+  --ty: 30vh;
+  --rot: 20deg;
+}
+
+.firstSec .line:nth-of-type(2) .cell:nth-child(5) img {
+  --tx: 26vw;
+  --ty: -24vh;
+  --rot: -16deg;
+}
+
+.firstSec .line:nth-of-type(2) .cell:nth-child(6) img {
+  --tx: -38vw;
+  --ty: 18vh;
+  --rot: 14deg;
+}
+
+.firstSec .line:nth-of-type(2) .cell:nth-child(7) img {
+  --tx: 32vw;
+  --ty: -28vh;
+  --rot: -22deg;
+}
+
+.firstSec .line:nth-of-type(2) .cell:nth-child(8) img {
+  --tx: -30vw;
+  --ty: 26vh;
+  --rot: 10deg;
+}
+
+.firstSecImg {
+  display: grid;
+  grid-auto-flow: column;
+  --box: clamp(64px, 7.5vw, 110px);
+  grid-auto-columns: var(--box);
+  gap: clamp(10px, 1.4vw, 22px);
+  place-items: center;
+  justify-content: center;
+
+
+}
+
+.firstSecImg>.portfolioImg {
+  width: 270px;
+  display: grid;
+  place-items: center;
+}
+
+.portfolioImg img {
+  width: 100%;
+  transform: translate(var(--px, 0), var(--py, 200px)) rotate(var(--rot, 0));
+  opacity: 0;
+  transition: all 0.8s ease;
+  cursor: pointer;
+}
+
+
+
+.btnTop {
+  width: 110px;
+  background-color: transparent;
+  border: none;
+  position: fixed;
+  right: 50px;
+  bottom: 50px;
+  cursor: pointer;
+  opacity: 1;
+  transition: transform 0.5s ease-out, opacity 0.5s ease-out;
+
+
+}
+
+.btnTop>img {
+  width: 100%;
+}
+
+.btnTop.oacityEffect {
+  transform: translateY(-150px);
+  opacity: 0;
+
+
+}
+
+.firstSecImg {
+  position: absolute;
+  top: 40vh;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1;
+}
+
+.firstSecImg img {
+  transform: translateY(200px);
+  opacity: 0;
+  transition: all 0.8s ease;
+}
+
+.firstSecImg.aligned img,
+.firstSec.aligned .firstSecImg img {
+  transform: translateY(200px);
+  /* ✅ 그대로 유지 */
+  opacity: 1;
+  /* 페이드인만 */
+}
+
+/* 정렬될 때 */
+.firstSec.aligned .firstSecImg img {
+  transform: translate(0, 200px) rotate(0);
+  opacity: 1;
+}
+
+.firstSecImg.aligned .portfolioImg img {
+  transform: translate(0, 0) rotate(0);
+  opacity: 1;
+}
+
+.works {
+
+  position: relative;
+  min-height: 400px;
+
+  & .worksImg {
+
+    position: absolute;
+    width: 25vw;
+    top: 100%;
+    left: 50%;
+    transform: translate(-50%, -50%) rotate(-5deg) scale(0.8);
+    opacity: 0.6;
+    transition: all 0.8s ease;
+
+    & img {
+      width: 100%;
+      border-radius: 10px;
+
+
+    }
+
+  }
+
+
+
+}
+.bgBox{
+  width: 100%; 
+  position: relative;
+  background-image: url(./../img/mainBg.jpg);
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  justify-content: center;
+  transition: background-color 1s ease;
+  background-color: rgba(64, 64, 64, 1);
+
+  /* 처음엔 불투명 덮개 */
+  background-blend-mode: overlay;
+  /* 덮개 + 이미지 블렌드 */
+}
+
+.about {
+  
+
+  width: 100%; 
+  align-items: center;
+  overflow: hidden;
+  padding: 10vw;
+  box-sizing: border-box; 
+
+  
+
+
+
+  & .subMainBg {
+    width: 100%; height: 80vh;
+
+    background-image: url(./../img/subMainBg2.png);
+    background-position: center center;
+    background-size: cover;
+    background-repeat: no-repeat;
+   
+  
+
+
+  }
+  
+  & .aboutIconBox {
+    position: relative;
+    width: 100%;
+    
+
+  }
+
+  & .introduction {
+    position: absolute;
+    top: 140px;
+    width: 20vw;
+    left:10vw;
+    cursor: pointer;
+
+   
+  }
+
+  & .aboutIcon {
+    width: 15%;
+    animation: mymove 5s infinite;
+    cursor: pointer;
+ 
+
+  }
+  
+  
+
+
+  & img {
+    width: 100%;
+  }
+}
+ 
+.modal{
+ 
+  display: none;    
+
+    & .paperImg{
+      width: 60% ; height: 400px;
+      background-image: url(./../img/paperIgm.png);
+      background-size: cover;
+      background-repeat: no-repeat;
+      padding: 50px ;
+      box-sizing: border-box;
+      & p{
+
+        width: 100%;
+        text-align: center;
+        font-weight: 500;
+        font-size: 25px;
+       
+      }
+    }
+    & .skillIcons{
+      display: flex;
+      flex-wrap: wrap;
+      & .skillIcon{
+        width: 40px;
+      }
+
+    }
+  }
+
+
+@keyframes mymove {
+
+    0% {transform: rotate(10deg)}
+    25%{transform: rotate(0deg)}
+    50%{transform: rotate(-10deg)}
+    75%{transform: rotate(0deg)}
+    100% {transform: rotate(10deg);}
+
+  }
+
+
+
+.spacer {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+
+}
+.modal.addModal{
+    width: 100% !important; height:100vh !important;
+    display: flex !important; 
+    transform: none !important;
+    position: fixed !important; 
+    justify-content: center !important;
+    align-items: center !important;
+    top: 0;
+    bottom: 0;  
+    left: 0;
+    inset: 0;
+    right: 0;
+    gap: 100px;
+    z-index: 20;
+    box-sizing: border-box;
+    background-color:rgba(64, 64, 64, 0.5);
+    contain: paint !important;
+    & .paperImg,textImg{
+      width:20%;
+      border-radius: 20px;
+      justify-content: center;
+      align-items: center;                       
+
+    & img{
+      width: 100%;
+      border-radius: 20px;
+      }
+    
+}
+}
+
+/* ===== Project Section (av-portfolios) ===== */
+
+.av-portfolios {
+  position: relative;
+  width:70%;
+  height: 420px;
+  margin: 50vh auto;
+  overflow: visible;
+  z-index: 10; /* 다른 요소에 가려지지 않게 */
+}
+
+.av-portfolios-box-wrapper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+.av-portfolios-box {
+  position: relative;   /* 고정은 JS ScrollTrigger가 처리 */
+  width: 70%;
+  height: 420px;
+  margin: 0 auto;
+}
+.av-boxBack,
+.av-boxFront {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 55%;
+}
+
+.av-boxBack { z-index: 1; }
+.av-boxFront { z-index: 10; pointer-events: none; }
+
+.av-box-portfolio {
+  position: absolute;
+  left: 50%;
+
+  transform: translateX(-50%);
+  width: 56%;
+  height: 70%;
+
+  border-radius: 8px;
+  z-index: 6;
+  overflow: visible;
+}
+
+.av-box-portfolio-bg {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: auto;
+  display: block;
+  z-index: 1;
+}
+
+.av-portfolio-thumbnail {
+  position: absolute;
+  top: -125%; /* 위로 절반 삐져나오게 */
+  left: 50%;
+  transform: translateX(-50%);
+  width: 95%;
+  border-radius: 10px;
+  cursor: pointer;
+  z-index: 2;
+  object-fit: cover;
+
+}
+
+
+.worksImg:nth-child(1) {
+  transform: translate(-55%, -55%) rotate(-5deg) scale(0.8);
+  opacity: 0.5;
+  z-index: 1;
+}
+
+.worksImg:nth-child(2) {
+  transform: translate(-52%, -52%) rotate(4deg) scale(0.85);
+  opacity: 0.6;
+  z-index: 2;
+}
+
+.worksImg:nth-child(3) {
+  transform: translate(-50%, -50%) rotate(-3deg) scale(0.9);
+  opacity: 0.7;
+  z-index: 3;
+}
+
+.worksImg:nth-child(4) {
+  transform: translate(-48%, -48%) rotate(6deg) scale(1);
+  opacity: 1;
+  z-index: 4;
+}
+
+.aboutIcon:nth-child(2) {
+  position: absolute;
+  right:19vw;
+  top: 200px;
+  animation-delay: 0s;
+}
+                                                                        
+.aboutIcon:nth-child(3) {
+  position: absolute;
+  top:340px ; right: 5vw;
+  animation-delay: 2s;
+
+}
+
+.aboutIcon:nth-child(4) {
+  position: absolute;
+  top: 370px;
+  right:31vw;
+  animation-delay: 4s;
+
+}
+
+.aboutIcon:nth-child(5) {
+  position: absolute;
+  right: 18vw; top: 500px;
+  animation-delay: 6s;
+
+}
+
+
+
+.works.expanded {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 20px;
+  padding: 40px;
+}
+
+.works.expanded .worksImg {
+  position: static;
+  opacity: 1;
+}
+
+#toggleWorks {
+
+  width: 300px;
+  margin: 0 auto;
+  position: relative;
+  left: 50%;
+  right: 50%;
+  transform: translate(-50%);
+  bottom: 150px;
+  z-index: 5;
+  background-color: transparent;
+  border: none;
+  font-size: 22px;
+  cursor: pointer;
+
+  & img {
+    width: 100%;
+  }
+
+
+}
+
+.works.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 20px;
+  padding: 60px 40px;
+}
+
+.works.grid .worksImg {
+  position: static;
+  width: 100%;
+  transform: none;
+  opacity: 1;
+}
+.about.scroll-disable{ /* JS에서 붙이는 클래스 */
+  height:100%; 
+  min-height:100%; 
+  overflow:hidden !important; 
+  touch-action:none;
+}
+
+.popup {
+ display: none;
+ position: fixed;
+ left: 0; top: 0;
+ width: 80%; height: 80vh;
+ background: violet;
+}
+.popup.active {
+ display: block;
+}
+.toggle {
+  position: fixed;
+ left: 10px; top: 30px;
+} 
+.about.scroll-disable{ /* 스크롤 비활성화 클래스 */
+ height:100%; 
+ min-height:100%; 
+ overflow:hidden !important; 
+ touch-action:none;
+}
+
+
+@supports(selector(:has(*))) {
+  .aboutIcon:has(> .modal.addModal) {
+    animation: none !important;
+    transform: none !important;
+    will-change: auto !important;
+  }
+}
+html.modal-open, body.modal-open{
+  height:100%;
+  overflow:hidden !important;
+  overscroll-behavior: none;
+}
+.contect{
+  width:100% ;
+
+  & .contectBox{
+    width:50% ;
+    position: relative;
+    
+  }
+ 
+}
+
+/* ===== Portfolio Files 3D Effect (위치 고정) ===== */
+.av-portfolios-box-wrapper {
+  perspective: 2000px;
+  perspective-origin: center center;
+}
+
+.av-portfolios-box {
+  transform-style: preserve-3d;
+}
+
+/* 파일 컨테이너에 3D 효과만 */
+.av-box-portfolio {
+  transform: rotateY(-8deg) rotateX(4deg); /* 살짝 기울기 */
+  transition: transform 0.6s ease;
+
+  transition: 3s;
+}
+
+/* 썸네일도 동일하게 깊이감 */
+.av-portfolio-thumbnail {
+
+
+}
+
+/* hover 시 더 강조만 (위치는 그대로) */
+.av-box-portfolio:hover {
+  transform: rotateY(-12deg) rotateX(6deg);
+
+}
