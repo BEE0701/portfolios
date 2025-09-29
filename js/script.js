@@ -1,3 +1,34 @@
+// av-portfolios-box 자체를 pin (스크롤 내려도 박스는 고정)
+ScrollTrigger.create({
+  pin:".av-portfolios-box",
+  trigger: ".av-portfolios",
+  start: "top 300 top",
+  end: "bottom bottom",   // 박스가 고정되는 구간 길이 (파일 개수에 맞게 조절)
+  pinSpacing: false
+});
+
+// 파일들 순서대로 보이게
+const cards = gsap.utils.toArray(".av-box-portfolio");
+
+cards.forEach((card, i) => {
+  gsap.to(card, 
+    
+    { y: 10, opacity: 0 },
+  {
+      y: 100, opacity: 1,
+      zIndex: i + 4,
+      scrollTrigger: {
+        trigger: ".av-portfolios",
+        start: () => "top100+=" + (i * window.innerHeight),
+        end: () => "+20=" + window.innerHeight,
+        scrub: true
+      }
+    }
+  );
+});
+
+
+
 $(function(){
   let lastScrollY = 0;
   $(window).on("scroll",function(){
@@ -8,7 +39,7 @@ $(function(){
       $("header").slideDown(300)
     }
   })
-})
+});
 // 1) 랜덤 흩어짐 값 적용
 document.querySelectorAll('.cell img').forEach(img => {
   const tx = (Math.random() - 0.5) * 80;  // -40 ~ +40vw
@@ -18,6 +49,7 @@ document.querySelectorAll('.cell img').forEach(img => {
   img.style.setProperty('--ty', `${ty}vh`);
   img.style.setProperty('--rot', `${rot}deg`);
 });
+
 
 // 2) 스크롤에 따라 aligned 토글
 const section = document.querySelector('.firstSec');
@@ -29,7 +61,7 @@ function onScroll() {
   const rect = container.getBoundingClientRect();
   section.classList.toggle('aligned', rect.top <= -ALIGN_TRIGGER);
   
-}
+};
 window.addEventListener('scroll', onScroll);
 onScroll();
 
@@ -46,7 +78,7 @@ onScroll();
     } else {
       btnTop.classList.add('oacityEffect');
     }
-  }
+  };
     window.addEventListener('scroll', toggleBtn);
 
         $('.btnTop').on("click",function(){
@@ -55,7 +87,7 @@ onScroll();
         },2000)
     });
 
-})
+});
 
 
 document.querySelectorAll(".portfolioImg img").forEach(img => {
@@ -75,105 +107,61 @@ const firstSecImg = document.querySelector('.firstSecImg');
 
 
 const portfolios = document.querySelectorAll(".av-box-portfolio");
-let current = 0;
+let currentIndex = 0;
+let isAnimating = false;
 
-// 기본 카드 크기
-const baseWidth = 550;
-const baseHeight = 300;
-
-// 랜덤 오프셋 저장 (-15px ~ +15px)
-const randomOffsets = Array.from({ length: portfolios.length }, () =>
-  Math.floor(Math.random() * 30 - 15)
-);
-
-
+// 카드 위치 업데이트
 function updatePositions() {
-  portfolios.forEach((el, i) => {
-    let order = (i - current + portfolios.length) % portfolios.length;
+  portfolios.forEach((card, i) => {
+    const order = (i - currentIndex + portfolios.length) % portfolios.length;
 
-    // 기본 크기
-    let width = baseWidth;
-    let height = baseHeight;
-
-    // 맨 앞 카드만 20px 더 크게
-    if (order === -1) {
-      width += 60;
-      height += 280;
-      let height = baseHeight + (4 - order) * 300; // 뒤로 갈수록 100px씩 줄어듦
-    }
-    
-    // 랜덤 높이 편차 적용
-    let offsetY = randomOffsets[i];
-    el.style.width = width + "px";
-    el.style.height = height + "px";
-    el.style.transform = `translate3d(-50%, ${offsetY}px, 0)`;
-    el.style.zIndex = portfolios.length - order;
-    el.style.opacity = order > 4 ? "0" : "1";
-
-    // 카드마다 다른 테두리 색
-  
+    gsap.to(card, {
+      y: order * 40,                     // 카드 간격
+      scale: order === 0 ? 1 : 0.9,      // 맨 앞 카드만 크게
+      opacity: order > 3 ? 0 : 1,        // 4장까지만 보이도록
+      zIndex: portfolios.length - order,
+      duration: 0.6,
+      ease: "power3.out"
+    });
   });
 }
 
-
-
+// 다음 카드
 function showNext() {
-  current = (current + 1) % portfolios.length;
+  if (isAnimating) return;
+  isAnimating = true;
+  currentIndex = (currentIndex + 1) % portfolios.length;
   updatePositions();
+  setTimeout(() => (isAnimating = false), 700);
 }
 
+// 이전 카드
 function showPrev() {
-  current = (current - 1 + portfolios.length) % portfolios.length;
+  if (isAnimating) return;
+  isAnimating = true;
+  currentIndex = (currentIndex - 1 + portfolios.length) % portfolios.length;
   updatePositions();
+  setTimeout(() => (isAnimating = false), 700);
 }
 
-let isScrolling = false;
+// 휠 이벤트
 window.addEventListener("wheel", (e) => {
-  if (isScrolling) return;
-  isScrolling = true;
-
-  if (e.deltaY > 1) {
-    showNext(200);
-  } else {  
-    showPrev(200);
+  if (e.deltaY > 0) {
+    showNext();
+  } else {
+    showPrev();
   }
+}, { passive: true });
 
-  setTimeout(() => {
-    isScrolling = false;
-  }, 500);
-});
-
-// 초기 배치
+// 초기 세팅
 updatePositions();
 
-gsap.registerPlugin(ScrollTrigger);
 
-// av-portfolios-box 자체를 pin (스크롤 내려도 박스는 고정)
-ScrollTrigger.create({
-  trigger: ".av-portfolios",
-  start: "top top",
-  end: "+=400%",   // 박스가 고정되는 구간 길이 (파일 개수에 맞게 조절)
-  pin: ".av-portfolios-box",
-  pinSpacing: true
-});
 
-// 파일들 순서대로 보이게
-const cards = gsap.utils.toArray(".av-box-portfolio");
 
-cards.forEach((card, i) => {
-  gsap.to(card, {
-    scrollTrigger: {
-      trigger: ".av-portfolios",
-      start: () => "top top+=" + (i * window.innerHeight * 0.8),
-      end: () => "+=" + window.innerHeight * 0.8,
-      scrub: true
-    },
-    opacity: 1,
-    y: 0,
-    zIndex: i + 5,
-    duration: 1
-  });
-});
+
+
+
   AOS.init();
 
   
@@ -210,6 +198,3 @@ function scrollAble(){ // body 스크롤 활성화
   
  
 }) //jquery end
-
-
-

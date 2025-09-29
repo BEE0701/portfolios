@@ -9,12 +9,12 @@
 }
 
 /* 레이아웃 */
-body {
+/* body {
   margin: 0;
   padding: 0;
   min-height: 500vh;
   background: var(--bg);
-}
+} */
 
 header {
   width: 100%;
@@ -56,7 +56,6 @@ header.hide {
 
 main {
   width: 100%;
-  height: 800vh;
   position: relative;
   background-color: var(--bg);
 }
@@ -407,18 +406,20 @@ main {
   overflow: hidden;
   padding: 10vw;
   box-sizing: border-box; 
-
+  margin-top: 100px;
   
 
 
 
   & .subMainBg {
-    width: 100%; height: 80vh;
-
+    
+    width: 100%; height: 90vh;
     background-image: url(./../img/subMainBg2.png);
     background-position: center center;
     background-size: cover;
     background-repeat: no-repeat;
+
+  
    
   
 
@@ -467,7 +468,7 @@ main {
       background-image: url(./../img/paperIgm.png);
       background-size: cover;
       background-repeat: no-repeat;
-      padding: 50px ;
+      padding: 45px  80px;
       box-sizing: border-box;
       & p{
 
@@ -481,8 +482,9 @@ main {
     & .skillIcons{
       display: flex;
       flex-wrap: wrap;
+      gap: 40px;
       & .skillIcon{
-        width: 40px;
+        width: 50px;
       }
 
     }
@@ -510,6 +512,7 @@ main {
 
 }
 .modal.addModal{
+  
     width: 100% !important; height:100vh !important;
     display: flex !important; 
     transform: none !important;
@@ -526,6 +529,9 @@ main {
     box-sizing: border-box;
     background-color:rgba(64, 64, 64, 0.5);
     contain: paint !important;
+    & img:nth-child(1){
+      width: 20vw;
+    }
     & .paperImg,textImg{
       width:20%;
       border-radius: 20px;
@@ -545,8 +551,8 @@ main {
 .av-portfolios {
   position: relative;
   width:70%;
-  height: 420px;
-  margin: 50vh auto;
+  height: calc(100vh * 3);
+  margin: 30vh auto;
   overflow: visible;
   z-index: 10; /* 다른 요소에 가려지지 않게 */
 }
@@ -561,16 +567,16 @@ main {
 .av-portfolios-box {
   position: relative;   /* 고정은 JS ScrollTrigger가 처리 */
   width: 70%;
-  height: 420px;
+  height:100vh;
   margin: 0 auto;
 }
 .av-boxBack,
 .av-boxFront {
   position: absolute;
-  bottom: 0;
   left: 50%;
   transform: translateX(-50%);
-  width: 55%;
+  width: 75%;
+  top: 300px;
 }
 
 .av-boxBack { z-index: 1; }
@@ -579,14 +585,14 @@ main {
 .av-box-portfolio {
   position: absolute;
   left: 50%;
-
   transform: translateX(-50%);
   width: 56%;
   height: 70%;
-
+  top: 300px;
   border-radius: 8px;
   z-index: 6;
   overflow: visible;
+  opacity: 1;
 }
 
 .av-box-portfolio-bg {
@@ -601,8 +607,8 @@ main {
 
 .av-portfolio-thumbnail {
   position: absolute;
-  top: -125%; /* 위로 절반 삐져나오게 */
-  left: 50%;
+  top: -30%; /* 위로 절반 삐져나오게 */
+  
   transform: translateX(-50%);
   width: 95%;
   border-radius: 10px;
@@ -637,6 +643,13 @@ main {
   z-index: 4;
 }
 
+.aboutIcon:nth-child(1) {
+  width: 15vw;
+  position: absolute;
+  left: 10vw;
+  top: 160px;
+  
+}
 .aboutIcon:nth-child(2) {
   position: absolute;
   right:19vw;
@@ -715,7 +728,7 @@ main {
   transform: none;
   opacity: 1;
 }
-.about.scroll-disable{ /* JS에서 붙이는 클래스 */
+.about.scroll-disable{ 
   height:100%; 
   min-height:100%; 
   overflow:hidden !important; 
@@ -768,31 +781,78 @@ html.modal-open, body.modal-open{
 }
 
 /* ===== Portfolio Files 3D Effect (위치 고정) ===== */
-.av-portfolios-box-wrapper {
+/* .av-portfolios-box-wrapper {
   perspective: 2000px;
   perspective-origin: center center;
 }
 
 .av-portfolios-box {
   transform-style: preserve-3d;
-}
-
+} */
+/* 
 /* 파일 컨테이너에 3D 효과만 */
+
 .av-box-portfolio {
-  transform: rotateY(-8deg) rotateX(4deg); /* 살짝 기울기 */
+  transform: rotateY(-8deg);
   transition: transform 0.6s ease;
 
   transition: 3s;
 }
 
-/* 썸네일도 동일하게 깊이감 */
-.av-portfolio-thumbnail {
 
+
+.av-box-portfolio:hover {
+  transform: rotateY(-12deg);
 
 }
+.contect{
+  width: 100%;
+}
 
-/* hover 시 더 강조만 (위치는 그대로) */
-.av-box-portfolio:hover {
-  transform: rotateY(-12deg) rotateX(6deg);
+.contectBox{
+  width: 100%;
+  padding-top: 50%  ;
+  background-image: url(./../img/contact.png);
+  background-position: center center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  margin: 0 auto;
+  position: relative;
+}
+.contectLists{
+     font-family: 'JejuStoneWall';
+     position: absolute;
+     rotate: 90deg;
+    
+     & a{
+      font-size: 20px;
+       color: var(--yellow);
+     }
+}
+.contectLists:nth-child(1){
+  top: 700px;
+  left: -5%;
+}
+.contectLists:nth-child(2){
+  top: 770px;
+  left: 18%;
+}
+.contectLists:nth-child(3){
+  top: 720px;
+  left: 53%;
+}
+.contectLists:nth-child(4){
+  top: 750px;
+  left: 84%;
+}
+.last{
+  padding: 200px 0 ;
 
+  & h3{
+    font-family: 'JejuStoneWall';
+    text-align: center;
+    font-size: 120px;
+    color: var(--yellow);
+
+  }
 }
